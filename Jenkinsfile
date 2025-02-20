@@ -25,7 +25,7 @@ pipeline {
                         -Dsonar.projectKey=crud-backend \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.login=$SONAR_TOKEN \
+                        -Dsonar.login=${env.SONAR_TOKEN} \
                         -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \
                         -Dsonar.sourceEncoding=UTF-8
                     """
