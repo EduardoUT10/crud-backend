@@ -19,7 +19,7 @@ pipeline {
         }
         stage('3.SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQubeScanner') {
+                withSonarQubeEnv('SonarQube') {
                     bat """
                         sonar-scanner \
                         -Dsonar.projectKey=crud-backend \
