@@ -14,6 +14,7 @@ pipeline {
                 bat 'mvn clean install -DskipTests'
             }
         }
+        
         stage('3.SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
