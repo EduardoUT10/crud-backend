@@ -2,17 +2,17 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('1.Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/EduardoUT10/crud-backend.git'
             }
         }
-        stage('Maven Build') {
+        stage('2.Maven Build') {
             steps {
                 bat 'mvn clean install -DskipTests'
             }
         }
-        stage('SonarQube Analysis') {
+        stage('3.SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     bat """
@@ -27,7 +27,7 @@ pipeline {
                 }
             }
         }
-        stage("Quality Gate") {
+        stage("4.Quality Gate") {
             steps {
                 script {
                     timeout(time: 5, unit: 'MINUTES') {
