@@ -5,7 +5,8 @@ pipeline {
     }
     environment {
         SONAR_TOKEN = credentials('sonarqube-auth-token')  // Aquí reemplaza 'sonar-token-id' con el ID de tu credencial
-    }    
+    } 
+    
     stages {
         stage('1.Checkout') {
             steps {
