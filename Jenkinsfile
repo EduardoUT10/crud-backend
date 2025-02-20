@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        sonarQube 'SonarQube' // Nombre configurado en Jenkins para SonarQube
+        sonarQube 'SonarQubeScanner' // Nombre configurado en Jenkins para SonarQube
         // Puedes configurar un instalador de Gradle en Jenkins y asignarlo aquí si tienes uno configurado
         gradle 'Gradle' // Nombre de la instalación de Gradle configurada en Jenkins
     }
