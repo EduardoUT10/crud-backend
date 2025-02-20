@@ -1,34 +1,31 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven' // Nombre de la instalación de Maven configurado en Jenkins
-        sonarQube 'SonarQube' // Nombre configurado en Jenkins para SonarQube
-    }    
+        sonarQube 'SonarQubeScanner' // Nombre configurado en Jenkins para SonarQube
+        // Puedes configurar un instalador de Gradle en Jenkins y asignarlo aquí si tienes uno configurado
+        gradle 'Gradle' // Nombre de la instalación de Gradle configurada en Jenkins
+    }
+
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/EduardoUT10/crud-backend.git'
             }
         }
-        
-        stage('Maven Build') {
+        stage('Gradle Build') {
             steps {
-                // Aquí usamos 'bat' para ejecutar comandos Maven en un entorno Windows
-                bat 'mvn clean install -DskipTests' // 'DskipTests' para evitar ejecutar las pruebas (si lo deseas)
+                // Ejecuta el build de Gradle, similar a mvn clean install en Maven
+                script {
+                    // Si tienes tareas específicas de Gradle puedes incluirlas, por ejemplo "build"
+                    sh './gradlew clean build -x test' // Ejecuta el build sin tests, ajusta si necesitas ejecutar pruebas
+                }
             }
         }
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube') { // Asegúrate de que 'SonarQube' coincida con tu configuración en Jenkins
-                    bat """
-                        sonar-scanner \
-                        -Dsonar.projectKey=crud-backend \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.login=${SONAR_TOKEN} \
-                        -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \
-                        -Dsonar.sourceEncoding=UTF-8
-                    """
+                    // Ejecuta el análisis de SonarQube
+                    sh './gradlew sonarqube -Dsonar.projectKey=crud-backend -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${SONAR_TOKEN}'
                 }
             }
         }
