@@ -23,7 +23,7 @@ pipeline {
         }
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') { // Asegúrate de que 'SonarQube' coincida con tu configuración en Jenkins
+                withSonarQubeEnv('SonarQubeScanner') { // Asegúrate de que 'SonarQube' coincida con tu configuración en Jenkins
                     // Ejecuta el análisis de SonarQube
                     sh './gradlew sonarqube -Dsonar.projectKey=crud-backend -Dsonar.host.url=http://localhost:9000 -Dsonar.login=${SONAR_TOKEN}'
                 }
