@@ -3,8 +3,7 @@ pipeline {
     tools {
         maven 'Maven' // Nombre de la instalación de Maven configurado en Jenkins
         sonarQube 'SonarQubeScanner' // Nombre configurado en Jenkins para SonarQube
-    }
-    
+    }    
     stages {
         stage('Checkout') {
             steps {
