@@ -3,6 +3,7 @@ pipeline {
     tools {
         maven 'Maven' // El nombre debe coincidir con el nombre configurado en Jenkins
     }
+    
     stages {
         stage('1.Checkout') {
             steps {
