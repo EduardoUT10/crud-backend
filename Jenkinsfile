@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'Maven' // El nombre debe coincidir con el nombre configurado en Jenkins
-        sonarQube 'SonarQubeScanner' // Nombre configurado en Jenkins
+        sonarQube 'SonarQube' // Nombre configurado en Jenkins
     }  
     stages {
         stage('1.Checkout') {
