@@ -2,11 +2,8 @@ pipeline {
     agent any
     tools {
         maven 'Maven' // El nombre debe coincidir con el nombre configurado en Jenkins
-    }
-    environment {
-        SONAR_TOKEN = credentials('sonarqube-auth-token')  // Aquí reemplaza 'sonar-token-id' con el ID de tu credencial
-    } 
-    
+        sonarQube 'SonarQubeScanner' // Nombre configurado en Jenkins
+    }  
     stages {
         stage('1.Checkout') {
             steps {
@@ -26,7 +23,7 @@ pipeline {
                         -Dsonar.projectKey=crud-backend \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=http://localhost:9000 \
-                        -Dsonar.login=${env.SONAR_TOKEN} \
+                        -Dsonar.login=${SONAR_TOKEN} \
                         -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \
                         -Dsonar.sourceEncoding=UTF-8
                     """
