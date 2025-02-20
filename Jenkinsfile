@@ -10,6 +10,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/EduardoUT10/crud-backend.git'
             }
         }
+        
         stage('Maven Build') {
             steps {
                 // Aquí usamos 'bat' para ejecutar comandos Maven en un entorno Windows
